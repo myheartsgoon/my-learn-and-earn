@@ -3,9 +3,9 @@ from application import app
 
 manager = Manager(app)
 
-manager.add_command('runserver', Server(host='127.0.0.1', port=9999))
+manager.add_command('runserver', Server(host='0.0.0.0', port=8080))
 
 
 if __name__ == '__main__':
-    # manager.run()
-    app.run(host='127.0.0.1', port=9999, debug=True)
+    manager.run()
+    # app.run(host='0.0.0.0', port=8080, debug=True)
