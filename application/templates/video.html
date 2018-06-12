@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>视频</title>
+ <p uk-margin>
+     <div class="uk-container uk-container-small">
+         <div class="uk-text-center">
+            <div class="uk-inline-clip uk-transition-toggle uk-box-shadow-xlarge uk-box-shadow-hover-medium uk-padding" tabindex="0">
+                <a class="" href="#modal-media-video" uk-toggle><img src="{{ url_for('static', filename='img/thumnail.png') }}" width="320" height="240"  alt=""></a>
+                <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary">
+                    <p>Temp Video</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</p>
+
+<div id="modal-media-video" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+        <button class="uk-modal-close-outside" type="button" uk-close></button>
+        <!--<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=w0561gvxw9a&auto=0" allowFullScreen="true" quality="high" width="640" height="480" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>-->
+        <embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=g002046f9yp&auto=0" allowFullScreen="true" quality="high" width="640" height="480" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+    </div>
+</div>
+{% endblock %}

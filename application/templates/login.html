@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>登陆</title>
+<div class="uk-container container-small uk-margin-xlarge-top uk-margin-xlarge-bottom">
+    <form>
+        <fieldset class="uk-fieldset">
+            <legend class="uk-legend">请先登录</legend>
+
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input class="uk-input" type="text">
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                    <input class="uk-input" type="password">
+                </div>
+            </div>
+            <button class="uk-button uk-button-secondary uk-width-1-1">登录</button>
+        </fieldset>
+    </form>
+</div>
+<div>
+{% endblock %}

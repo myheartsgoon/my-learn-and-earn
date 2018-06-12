@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>登陆</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/uikit.min.css" />
+        <script src="js/uikit.min.js"></script>
+        <script src="js/uikit-icons.min.js"></script>
+    </head>
+
+    <style>
+        body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;}
+
+        html {
+          background-color: #f1f1f1;
+        }
+        .menu-text {
+          font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; 
+        }
+    </style>
+
+    <body>
+
+        <nav class="uk-navbar uk-navbar-container uk-margin">
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo" href="#"><img width="50" src="img/logo.png"></a>
+            </div>
+            <div class="uk-navbar-right">
+                <a class="uk-navbar-toggle menu-text" uk-toggle="target: #offcanvas-nav-primary">
+                    <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">菜单</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="uk-offcanvas-content">
+
+            <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true">
+                <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+
+                    <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                        <li class="uk-active">
+                            <a href="#"><span class="uk-margin-small-right" uk-icon="icon: home"></span>首页</a>
+                        </li>
+                        <li class="uk-parent">
+                            <a href="#"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span>登录</a>
+                        </li>
+                        <li class="uk-parent">
+                            <a href="#"><span class="uk-margin-small-right" uk-icon="icon: plus"></span>注册</a>
+                        </li>
+                        <!-- <li class="uk-nav-header">Header</li> -->
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> 更多</a></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> 应用 </a></li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> 退出</a></li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+        <form class="uk-position-center">
+            <fieldset class="uk-fieldset">
+                <legend class="uk-legend">请先登录</legend>
+
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                        <input class="uk-input" type="text">
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                        <input class="uk-input" type="text">
+                    </div>
+                </div>
+                <button class="uk-button uk-button-secondary uk-width-1-1">登录</button>
+            </fieldset>
+        </form>
+
+
+        <div class="uk-container uk-container-expand uk-text-center uk-position-bottom uk-padding">
+            <ul uk-margin="" class="uk-subnav tm-subnav uk-flex-inline uk-flex-center uk-margin-remove-bottom">
+                <li><a href="mailto:myheartsgoon@gmail.com">
+                    <span uk-icon="icon: mail" class="uk-margin-small-right uk-icon"></span>联系我们</a>
+                </li> 
+                <li><a href="https://github.com/uikit/uikit/stargazers">
+                    <span uk-icon="icon: commenting" class="uk-margin-small-right uk-icon"></span>获取帮助</a>
+                </li> 
+                <li><a href="https://github.com/myheartsgoon" class="uk-text-lowercase">
+                    <span uk-icon="icon: github" class="uk-margin-small-right uk-icon"></span>@myheartsgoon</a>
+                </li> 
+                <li><a href="https://gitter.im/uikit/uikit">
+                    <span uk-icon="icon: gitter" class="uk-margin-small-right uk-icon"></span>更多</a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

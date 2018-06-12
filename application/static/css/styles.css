@@ -1,0 +1,37 @@
+body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;}
+
+html {
+  background-color: #f1f1f1;
+}
+.menu-text {
+  font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+.center {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.article-background {
+  background-color: #f9f9f9;
+}
+
+.article-date {
+  margin-top: 5px;
+}
+
+.footer {
+  position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background-color: #efefef;
+}
+
+.container-small {
+  max-width: 250px;
+
+}

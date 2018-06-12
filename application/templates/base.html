@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/uikit.min.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+        <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.ico') }}" type="image/x-icon">
+        <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/uikit-icons.min.js') }}"></script>
+    </head>
+
+    <body>
+
+        <nav class="uk-navbar uk-navbar-container uk-margin">
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo" href="{{ url_for('home') }}"><img width="50" src="{{ url_for('static', filename='img/logo.png') }}"></a>
+            </div>
+
+            <div class="uk-navbar-right">
+
+                <div>
+                    <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
+                    <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+                        <form class="uk-search uk-search-navbar uk-width-1-1">
+                            <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+                        </form>
+                    </div>
+                </div>
+
+                <a class="uk-navbar-toggle menu-text" uk-toggle="target: #offcanvas-nav-primary">
+                    <span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">菜单</span>
+                </a>
+
+            </div>
+
+        </nav>
+
+
+
+
+        {% block content %}
+        {% endblock %}
+
+        <div class="uk-offcanvas-content">
+
+            <div id="offcanvas-nav-primary" uk-offcanvas="overlay: false">
+                <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+
+                    <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                        <li class="uk-active">
+                            <a href="{{ url_for('home') }}"><span class="uk-margin-small-right" uk-icon="icon: home"></span>首页</a>
+                        </li>
+                        <li class="uk-parent">
+                            <a href="{{ url_for('login') }}"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span>登录</a>
+                        </li>
+                        <li class="uk-parent">
+                            <a href="{{ url_for('signup') }}"><span class="uk-margin-small-right" uk-icon="icon: plus"></span>注册</a>
+                        </li>
+                        <!-- <li class="uk-nav-header">Header</li> -->
+                        <li><a href="{{ url_for('article') }}"><span class="uk-margin-small-right" uk-icon="icon: file-edit"></span> 文章</a></li>
+                        <li><a href="{{ url_for('video') }}"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> 视频 </a></li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> 退出</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-container uk-container-expand uk-text-center uk-margin-xlarge-top footer">
+            <ul uk-margin="" class="uk-subnav tm-subnav uk-flex-inline uk-flex-center uk-margin-remove-bottom">
+                <li><a href="mailto:myheartsgoon@gmail.com">
+                    <span uk-icon="icon: mail" class="uk-margin-small-right uk-icon"></span>联系我</a>
+                </li>
+                <li><a href="https://github.com/uikit/uikit/stargazers">
+                    <span uk-icon="icon: commenting" class="uk-margin-small-right uk-icon"></span>获取帮助</a>
+                </li>
+                <li><a href="https://github.com/myheartsgoon" class="uk-text-lowercase">
+                    <span uk-icon="icon: github" class="uk-margin-small-right uk-icon"></span>@myheartsgoon</a>
+                </li>
+                <li><a href="https://gitter.im/uikit/uikit">
+                    <span uk-icon="icon: gitter" class="uk-margin-small-right uk-icon"></span>更多</a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
