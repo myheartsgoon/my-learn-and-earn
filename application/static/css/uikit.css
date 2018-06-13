@@ -4702,7 +4702,7 @@ ul.uk-nav-sub {
   z-index: 1020;
   /* 3 */
   box-sizing: border-box;
-  width: 300px;
+  width: 150px;
 }
 /* Show */
 .uk-drop.uk-open {
