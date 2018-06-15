@@ -3,26 +3,35 @@
 {% block content %}
 <title>登陆</title>
 <div class="uk-container container-small uk-margin-xlarge-top uk-margin-xlarge-bottom">
-    <form>
+    <form method="POST" action="/login">
         <fieldset class="uk-fieldset">
             <legend class="uk-legend">请先登录</legend>
+
+            {% if get_flashed_messages() %}
+            <div class="uk-alert-danger" uk-alert>
+                {% for message in get_flashed_messages() %}
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
-                    <input class="uk-input" type="text">
+                    <input class="uk-input" id="username" name="username" type="text">
                 </div>
             </div>
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    <input class="uk-input" type="password">
+                    <input class="uk-input" id="password" name="password" type="password">
                 </div>
             </div>
             <button class="uk-button uk-button-secondary uk-width-1-1">登录</button>
         </fieldset>
     </form>
 </div>
-<div>
 {% endblock %}

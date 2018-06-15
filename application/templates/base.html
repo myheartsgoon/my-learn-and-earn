@@ -14,7 +14,7 @@
 
         <nav class="uk-navbar uk-navbar-container uk-margin">
             <div class="uk-navbar-left">
-                <a class="uk-navbar-item uk-logo" href="{{ url_for('home') }}"><img width="50" src="{{ url_for('static', filename='img/logo.png') }}"></a>
+                <a class="uk-navbar-item uk-logo" href="{{ url_for('blog.home') }}"><img width="50" src="{{ url_for('static', filename='img/logo.png') }}"></a>
             </div>
 
             <div class="uk-navbar-right">
@@ -22,8 +22,8 @@
                 <div>
                     <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
                     <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
-                        <form class="uk-search uk-search-navbar uk-width-1-1">
-                            <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+                        <form class="uk-search uk-search-navbar uk-width-1-1" method="GET" action="">
+                            <input class="uk-search-input" name="search" type="search" placeholder="Search..." autofocus>
                         </form>
                     </div>
                 </div>
@@ -38,7 +38,6 @@
 
 
 
-
         {% block content %}
         {% endblock %}
 
@@ -49,19 +48,22 @@
 
                     <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
                         <li class="uk-active">
-                            <a href="{{ url_for('home') }}"><span class="uk-margin-small-right" uk-icon="icon: home"></span>首页</a>
-                        </li>
-                        <li class="uk-parent">
-                            <a href="{{ url_for('login') }}"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span>登录</a>
-                        </li>
-                        <li class="uk-parent">
-                            <a href="{{ url_for('signup') }}"><span class="uk-margin-small-right" uk-icon="icon: plus"></span>注册</a>
+                            <a href="{{ url_for('blog.home') }}"><span class="uk-margin-small-right" uk-icon="icon: home"></span> 首页</a>
                         </li>
                         <!-- <li class="uk-nav-header">Header</li> -->
-                        <li><a href="{{ url_for('article') }}"><span class="uk-margin-small-right" uk-icon="icon: file-edit"></span> 文章</a></li>
-                        <li><a href="{{ url_for('video') }}"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> 视频 </a></li>
+                        <li><a href="{{ url_for('blog.article') }}"><span class="uk-margin-small-right" uk-icon="icon: file-edit"></span> 文章</a></li>
+                        <li><a href="{{ url_for('blog.video') }}"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> 视频 </a></li>
+                        {% if not current_user.is_authenticated %}
+                        <li class="uk-parent">
+                            <a href="{{ url_for('blog.login') }}"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span> 登录</a>
+                        </li>
+                        {% endif %}
+
+                        {% if current_user.is_authenticated %}
                         <li class="uk-nav-divider"></li>
-                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> 退出</a></li>
+                        <li><a href="{{ url_for('blog.publish') }}"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> 发表</a></li>
+                        <li><a href="{{ url_for('blog.logout') }}"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> 退出</a></li>
+                        {% endif %}
                     </ul>
 
                 </div>

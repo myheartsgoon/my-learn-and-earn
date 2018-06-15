@@ -1,1 +1,2 @@
-from .routes import app
+from .app import create_app
+from .models import db

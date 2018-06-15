@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>发表文章</title>
+<div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom">
+    <form method="POST" action="/publish">
+        <fieldset class="uk-fieldset">
+
+            <legend class="uk-legend">发表文章</legend>
+
+            <div class="uk-margin">
+                <input class="uk-input" id="title" name="title" type="text" placeholder="标题">
+            </div>
+
+            <div class="uk-margin">
+                <textarea class="uk-textarea" rows="3" id="descp" name="descp" placeholder="简介"></textarea>
+            </div>
+
+            <div class="uk-margin">
+                <textarea class="uk-textarea" rows="20" id="content" name="content" placeholder="正文"></textarea>
+            </div>
+
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                <label><input class="uk-radio" type="radio" name="radio" value="技术" checked> 技术</label>
+                <label><input class="uk-radio" type="radio" name="radio" value="生活"> 生活</label>
+            </div>
+
+            <button class="uk-button uk-button-secondary">发表</button>
+            <button class="uk-button uk-button-danger" uk-toggle="target: #modal-cancel">取消</button>
+            <div id="modal-cancel" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body">
+                    <p>你所有的编辑内容将会丢失，确定放弃发布？</p>
+                    <p class="uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">取消</button>
+                        <a class="uk-button uk-button-primary" href="{{ url_for('blog.article') }}">确定</a>
+                    </p>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
