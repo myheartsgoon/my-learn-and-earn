@@ -10,7 +10,7 @@
                 <img class="uk-comment-avatar" src="{{ url_for('static', filename='img/photo.jpg') }}" width="80" height="80" alt="">
             </div>
             <div class="uk-width-expand uk-margin-top">
-                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-heading" href="#">{{ a.title }}</a></h4>
+                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-heading" href="{{ url_for('blog.details', id=a.id) }}">{{ a.title }}</a></h4>
                 <p class="uk-comment-meta article-date">{{ a.time.strftime('%Y{y}%m{m}%d{d} %H:%M').format(y='年', m='月', d='日') }}</p>
             </div>
         </header>

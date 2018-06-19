@@ -8,6 +8,7 @@
         <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.ico') }}" type="image/x-icon">
         <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/uikit-icons.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
     </head>
 
     <body>
@@ -51,8 +52,8 @@
                             <a href="{{ url_for('blog.home') }}"><span class="uk-margin-small-right" uk-icon="icon: home"></span> 首页</a>
                         </li>
                         <!-- <li class="uk-nav-header">Header</li> -->
-                        <li><a href="{{ url_for('blog.article') }}"><span class="uk-margin-small-right" uk-icon="icon: file-edit"></span> 文章</a></li>
-                        <li><a href="{{ url_for('blog.video') }}"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> 视频 </a></li>
+                        <li><a href="{{ url_for('blog.article') }}"><span class="uk-margin-small-right" uk-icon="icon: list"></span> 文章</a></li>
+                        <li><a href="{{ url_for('blog.video') }}"><span class="uk-margin-small-right" uk-icon="icon: play-circle"></span> 视频 </a></li>
                         {% if not current_user.is_authenticated %}
                         <li class="uk-parent">
                             <a href="{{ url_for('blog.login') }}"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span> 登录</a>
@@ -61,7 +62,7 @@
 
                         {% if current_user.is_authenticated %}
                         <li class="uk-nav-divider"></li>
-                        <li><a href="{{ url_for('blog.publish') }}"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> 发表</a></li>
+                        <li><a href="{{ url_for('blog.publish') }}"><span class="uk-margin-small-right" uk-icon="file-edit"></span> 发表</a></li>
                         <li><a href="{{ url_for('blog.logout') }}"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> 退出</a></li>
                         {% endif %}
                     </ul>

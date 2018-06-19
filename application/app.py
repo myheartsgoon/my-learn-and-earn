@@ -4,6 +4,7 @@ from .models import db, User
 from .controllers import bp
 from .configs import config
 
+
 def create_app(config_name=None):
     if config_name is None:
         config_name = 'default'
