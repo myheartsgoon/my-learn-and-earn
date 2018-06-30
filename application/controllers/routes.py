@@ -3,7 +3,6 @@ from flask_login import login_required, current_user, login_user, logout_user
 from ..forms import LoginForm, PublishForm
 from application.models import db, User, Article
 from sqlalchemy import desc
-from werkzeug.utils import secure_filename
 import os
 import random
 import datetime
@@ -83,14 +82,17 @@ def publish():
         content = form.content.data
         category = request.form['radio']
         thumbnail = request.files['thumbnail']
-        fname, fext = os.path.splitext(thumbnail.filename)
-        if fext.rsplit('.')[1] not in ALLOWED_EXTENSIONS:
-            flash('请上传png,jpg或者gif格式图片！')
-            return render_template('publish.html', form=form)
-        rnd_name = '%s%s' % (gen_rnd_filename(), fext)
-        filepath = os.path.join(basedir, 'static', 'img', 'thumbnail', rnd_name)
-        thumbnail.save(filepath)
-        thumb_url = url_for('static', filename='%s/%s/%s' % ('img', 'thumbnail', rnd_name))
+        if thumbnail.filename == '':
+            thumb_url = ''
+        else:
+            fname, fext = os.path.splitext(thumbnail.filename)
+            if fext.rsplit('.')[1] not in ALLOWED_EXTENSIONS:
+                flash('请上传png,jpg或者gif格式图片！')
+                return render_template('publish.html', form=form)
+            rnd_name = '%s%s' % (gen_rnd_filename(), fext)
+            filepath = os.path.join(basedir, 'static', 'img', 'thumbnail', rnd_name)
+            thumbnail.save(filepath)
+            thumb_url = url_for('static', filename='%s/%s/%s' % ('img', 'thumbnail', rnd_name))
         new_article = Article(title, descp, content, category, thumb_url)
         db.session.add(new_article)
         db.session.commit()
