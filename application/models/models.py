@@ -33,9 +33,11 @@ class Article(db.Model):
     user = db.relationship('User', backref=db.backref('article'))
     time = db.Column(db.DateTime, default=datetime.now)
     category = db.Column(db.String(10))
+    thumbnail = db.Column(db.String(50))
 
-    def __init__(self, title, descp, content, category):
+    def __init__(self, title, descp, content, category, thumbnail):
         self.title = title
         self.content = content
         self.descp = descp
         self.category = category
+        self.thumbnail = thumbnail

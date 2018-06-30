@@ -1,10 +1,15 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash, make_response
 from flask_login import login_required, current_user, login_user, logout_user
+from ..forms import LoginForm, PublishForm
 from application.models import db, User, Article
 from sqlalchemy import desc
-import os, random, datetime
+from werkzeug.utils import secure_filename
+import os
+import random
+import datetime
 
 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 bp = Blueprint(
     'blog',
@@ -26,19 +31,22 @@ def home():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('blog.home'))
+    form = LoginForm()
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        if not form.validate():
+            return render_template('login.html', form=form)
+        username = form.username.data
+        password = form.password.data
         user = User.query.filter_by(username=username).first()
         if user is not None and user.check_password(password):
             login_user(user)
             return redirect(session.get('next') or url_for('blog.home'))
         else:
             flash('用户名或密码不正确！')
-            return render_template('login.html')
+            return render_template('login.html', form=form)
     elif request.method == 'GET':
         session['next'] = request.args.get('next')
-        return render_template('login.html')
+        return render_template('login.html', form=form)
 
 
 @bp.route('/logout')
@@ -57,23 +65,38 @@ def article():
 @bp.route('/article/<id>')
 def details(id):
     details = Article.query.filter_by(id=id).first()
-    return render_template('details.html', details=details)
+    if details is not None:
+        return render_template('details.html', details=details)
+    else:
+        return render_template('404.html')
 
 
 @bp.route('/publish', methods=['GET', 'POST'])
 @login_required
 def publish():
+    form = PublishForm()
     if request.method == 'POST':
-        title = request.form['title']
-        descp = request.form['descp']
-        content = request.form['content']
+        if not form.validate():
+            return render_template('publish.html', form=form)
+        title = form.title.data
+        descp = form.descp.data
+        content = form.content.data
         category = request.form['radio']
-        new_article = Article(title, descp, content, category)
+        thumbnail = request.files['thumbnail']
+        fname, fext = os.path.splitext(thumbnail.filename)
+        if fext.rsplit('.')[1] not in ALLOWED_EXTENSIONS:
+            flash('请上传png,jpg或者gif格式图片！')
+            return render_template('publish.html', form=form)
+        rnd_name = '%s%s' % (gen_rnd_filename(), fext)
+        filepath = os.path.join(basedir, 'static', 'img', 'thumbnail', rnd_name)
+        thumbnail.save(filepath)
+        thumb_url = url_for('static', filename='%s/%s/%s' % ('img', 'thumbnail', rnd_name))
+        new_article = Article(title, descp, content, category, thumb_url)
         db.session.add(new_article)
         db.session.commit()
         return redirect(url_for('blog.article'))
     elif request.method == 'GET':
-        return render_template('publish.html')
+        return render_template('publish.html', form=form)
 
 
 def gen_rnd_filename():
@@ -86,15 +109,12 @@ def ckupload():
     """CKEditor file upload"""
     error = ''
     url = ''
-    print(request.args)
     callback = request.args.get("CKEditorFuncNum")
-    print(callback, 123)
     if request.method == 'POST' and 'upload' in request.files:
         fileobj = request.files['upload']
         fname, fext = os.path.splitext(fileobj.filename)
         rnd_name = '%s%s' % (gen_rnd_filename(), fext)
-        filepath = os.path.join(basedir, 'static', 'img', rnd_name)
-        print(filepath)
+        filepath = os.path.join(basedir, 'static', 'img', 'article', rnd_name)
         # check if path exists, if not create it
         dirname = os.path.dirname(filepath)
         if not os.path.exists(dirname):
@@ -106,8 +126,7 @@ def ckupload():
             error = 'ERROR_DIR_NOT_WRITEABLE'
         if not error:
             fileobj.save(filepath)
-            url = url_for('static', filename='%s/%s' % ('img', rnd_name))
-            print(url)
+            url = url_for('static', filename='%s/%s/%s' % ('img', 'article', rnd_name))
     else:
         error = 'post error'
     res = """
@@ -118,10 +137,38 @@ def ckupload():
 """ % (callback, url, error)
     response = make_response(res)
     response.headers["Content-Type"] = "text/html"
-    print(response)
     return response
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def upload_thumbnail(fileobj):
+    error = ''
+    rnd_name = '%s%s' % (gen_rnd_filename(), fext)
+    filepath = os.path.join(basedir, 'static', 'img', 'article', rnd_name)
+    # check if path exists, if not create it
+    dirname = os.path.dirname(filepath)
+    if not os.path.exists(dirname):
+        try:
+            os.makedirs(dirname)
+        except:
+            error = 'ERROR_CREATE_DIR'
+    elif not os.access(dirname, os.W_OK):
+        error = 'ERROR_DIR_NOT_WRITEABLE'
+    if not error:
+        fileobj.save(filepath)
+        url = url_for('static', filename='%s/%s/%s' % ('img', 'thumbnail', rnd_name))
+        return url
 
 
 @bp.route('/video')
 def video():
     return render_template('video.html')
+
+
+@bp.app_errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404

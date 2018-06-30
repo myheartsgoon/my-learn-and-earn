@@ -23,7 +23,7 @@ html {
 }
 
 .footer {
-  position:fixed;
+   position:fixed;
    left:0px;
    bottom:0px;
    height:30px;
@@ -34,4 +34,8 @@ html {
 .container-small {
   max-width: 250px;
 
+}
+
+.upload-thumbnail {
+  display:inline-block;
 }

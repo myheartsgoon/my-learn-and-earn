@@ -4,6 +4,7 @@
 <title>登陆</title>
 <div class="uk-container container-small uk-margin-xlarge-top uk-margin-xlarge-bottom">
     <form method="POST" action="/login">
+        {{ form.hidden_tag() }}
         <fieldset class="uk-fieldset">
             <legend class="uk-legend">请先登录</legend>
 
@@ -16,21 +17,36 @@
             </div>
             {% endif %}
 
+            {% if form.username.errors %}
+            <div class="uk-alert-danger" uk-alert>
+                {% for error in form.username.errors %}
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% elif form.password.errors %}
+            <div class="uk-alert-danger" uk-alert>
+                {% for error in form.password.errors %}
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
-                    <input class="uk-input" id="username" name="username" type="text">
+                    {{ form.username(class="uk-input") }}
                 </div>
             </div>
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    <input class="uk-input" id="password" name="password" type="password">
+                    {{ form.password(class="uk-input") }}
                 </div>
             </div>
-            <button class="uk-button uk-button-secondary uk-width-1-1">登录</button>
+            {{ form.login(class="uk-button uk-button-secondary uk-width-1-1") }}
         </fieldset>
     </form>
 </div>

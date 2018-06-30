@@ -3,21 +3,67 @@
 {% block content %}
 <title>发表文章</title>
 <div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom">
-    <form method="POST" action="/publish">
+    <form method="POST" enctype=multipart/form-data action="/publish">
+        {{ form.hidden_tag() }}
         <fieldset class="uk-fieldset">
 
             <legend class="uk-legend">发表文章</legend>
 
+            {% if get_flashed_messages() %}
+            <div class="uk-alert-danger" uk-alert>
+                {% for message in get_flashed_messages() %}
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if form.title.errors %}
+            <div class="uk-alert-danger" uk-alert>
+                {% for error in form.title.errors %}
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% elif form.descp.errors %}
+            <div class="uk-alert-danger" uk-alert>
+                {% for error in form.descp.errors %}
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% elif form.content.errors %}
+            <div class="uk-alert-danger" uk-alert>
+                {% for error in form.content.errors %}
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <div class="uk-margin">
-                <input class="uk-input" id="title" name="title" type="text" placeholder="标题">
+                {{ form.title(class="uk-input") }}
             </div>
 
             <div class="uk-margin">
-                <textarea class="uk-textarea" rows="3" id="descp" name="descp" placeholder="简介"></textarea>
+                <!--<textarea class="uk-textarea" rows="3" id="descp" name="descp" placeholder="简介"></textarea>-->
+                {{ form.descp(class="uk-textarea", rows="3") }}
             </div>
 
             <div class="uk-margin">
-                <textarea class="uk-textarea" rows="20" id="editor" name="content" placeholder="正文"></textarea>
+                <!--<textarea class="uk-textarea" rows="20" id="editor" name="content" placeholder="正文"></textarea>-->
+                {{ form.content(class="uk-textarea", rows="20", id="editor") }}
+
+            </div>
+
+            <div class="uk-margin">
+                <span class="uk-text-middle">文章缩略图：</span>
+                <div class="upload-thumbnail">
+                    <div uk-form-custom="target: true">
+                        <input type="file" name="thumbnail">
+                        <input class="uk-input uk-form-small" type="text" placeholder="选择文件" disabled>
+                    </div>
+                </div>
             </div>
 
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
