@@ -4,28 +4,28 @@
 {{ super() }}
 {% endblock %}
 
-{% block title %}文章{% endblock %}
+{% block title %}搜索结果{% endblock %}
 {% block content %}
-{% for a in articles %}
+{% for r in result %}
 <div class="uk-container uk-container-small uk-margin-top article-background uk-box-shadow-medium uk-box-shadow-hover-xlarge">
     <article class="uk-comment">
         <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
             <div class="uk-width-auto uk-margin-top">
-                <a href="{{ url_for('blog.details', id=a.id) }}" class="">
-                    <img class="uk-comment-avatar" src="{{ a.thumbnail|default(url_for('static', filename='img/photo.jpg'), true) }}" width="80" height="80" alt="">
+                <a href="{{ url_for('blog.details', id=r.id) }}" class="">
+                    <img class="uk-comment-avatar" src="{{ r.thumbnail|default(url_for('static', filename='img/photo.jpg'), true) }}" width="80" height="80" alt="">
                 </a>
             </div>
             <div class="uk-width-expand uk-margin-top">
-                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-heading" href="{{ url_for('blog.details', id=a.id) }}">{{ a.title }}</a></h4>
+                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-heading" href="{{ url_for('blog.details', id=r.id) }}">{{ r.title }}</a></h4>
                 <p class="uk-comment-meta article-date">
-                    {{ a.time.strftime('%Y{y}%m{m}%d{d} %H:%M').format(y='年', m='月', d='日') }}
+                    {{ r.time.strftime('%Y{y}%m{m}%d{d} %H:%M').format(y='年', m='月', d='日') }}
                     <span uk-icon="icon: tag" class="uk-icon uk-margin-left"></span>
-                    {{ a.category }}
+                    {{ r.category }}
                 </p>
             </div>
         </header>
         <div class="uk-comment-body uk-margin-bottom">
-            <p>{{ a.descp }}</p>
+            <p>{{ r.descp }}</p>
         </div>
     </article>
 </div>

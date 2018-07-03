@@ -80,7 +80,7 @@ def publish():
         title = form.title.data
         descp = form.descp.data
         content = form.content.data
-        category = request.form['radio']
+        category = request.form.get('radio')
         thumbnail = request.files['thumbnail']
         if thumbnail.filename == '':
             thumb_url = ''
@@ -99,6 +99,15 @@ def publish():
         return redirect(url_for('blog.article'))
     elif request.method == 'GET':
         return render_template('publish.html', form=form)
+
+
+@bp.route('/search')
+def search():
+    keyword = request.args.get('keyword')
+    result = Article.query.filter(Article.content.contains(keyword)).all()
+    if len(result) == 0:
+        result.extend(Article.query.filter(Article.title.contains(keyword)).all())
+    return render_template('result.html', result=result)
 
 
 def gen_rnd_filename():
@@ -140,30 +149,6 @@ def ckupload():
     response = make_response(res)
     response.headers["Content-Type"] = "text/html"
     return response
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-def upload_thumbnail(fileobj):
-    error = ''
-    rnd_name = '%s%s' % (gen_rnd_filename(), fext)
-    filepath = os.path.join(basedir, 'static', 'img', 'article', rnd_name)
-    # check if path exists, if not create it
-    dirname = os.path.dirname(filepath)
-    if not os.path.exists(dirname):
-        try:
-            os.makedirs(dirname)
-        except:
-            error = 'ERROR_CREATE_DIR'
-    elif not os.access(dirname, os.W_OK):
-        error = 'ERROR_DIR_NOT_WRITEABLE'
-    if not error:
-        fileobj.save(filepath)
-        url = url_for('static', filename='%s/%s/%s' % ('img', 'thumbnail', rnd_name))
-        return url
 
 
 @bp.route('/video')

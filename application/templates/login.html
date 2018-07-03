@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block title %}登陆{% endblock %}
 {% block content %}
-<title>登陆</title>
 <div class="uk-container container-small uk-margin-xlarge-top uk-margin-xlarge-bottom">
     <form method="POST" action="/login">
         {{ form.hidden_tag() }}

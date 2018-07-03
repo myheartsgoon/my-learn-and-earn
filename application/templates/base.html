@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% block head %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/uikit.min.css') }}" />
@@ -8,12 +9,10 @@
         <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.ico') }}" type="image/x-icon">
         <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/uikit-icons.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/monokai-sublime.css') }}" />
-        <script src="{{ url_for('static', filename='js/highlight.min.js') }}"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
+        {% endblock %}
     </head>
+
+    <title>{% block title %}{% endblock %} - My learn and earn </title>
 
     <body>
 
@@ -27,8 +26,8 @@
                 <div>
                     <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
                     <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
-                        <form class="uk-search uk-search-navbar uk-width-1-1" method="GET" action="">
-                            <input class="uk-search-input" name="search" type="search" placeholder="Search..." autofocus>
+                        <form class="uk-search uk-search-navbar uk-width-1-1" method="GET" action="/search">
+                            <input class="uk-search-input" name="keyword" type="search" placeholder="Search..." autofocus>
                         </form>
                     </div>
                 </div>

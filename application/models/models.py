@@ -28,7 +28,7 @@ class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     descp = db.Column(db.String(100))
-    content = db.Column(db.String(2000))
+    content = db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref=db.backref('article'))
     time = db.Column(db.DateTime, default=datetime.now)

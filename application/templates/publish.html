@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+{% endblock %}
+
+{% block title %}发表文章{% endblock %}
 {% block content %}
-<title>发表文章</title>
 <div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom">
     <form method="POST" enctype=multipart/form-data action="/publish">
         {{ form.hidden_tag() }}

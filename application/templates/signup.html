@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block title %}注册{% endblock %}
 {% block content %}
-<title>注册</title>
 <div class="uk-container container-small uk-margin-xlarge-top uk-margin-xlarge-bottom">
     <form>
         <fieldset class="uk-fieldset">

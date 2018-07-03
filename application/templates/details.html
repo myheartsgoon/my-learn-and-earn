@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/highlight.min.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/monokai-sublime.css') }}" />
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+
+{% block title %}{{ details.title }}{% endblock %}
 {% block content %}
-<title>{{ details.title }}</title>
 <div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom">
     <article class="uk-article">
         <h1 class="uk-article-title">{{ details.title }}</h1>

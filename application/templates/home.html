@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block title %}首页{% endblock %}
 {% block content %}
-<title>首页</title>
 <div class="uk-container uk-container-small">
         <div uk-slider="center: true">
 
