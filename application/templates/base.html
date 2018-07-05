@@ -26,7 +26,7 @@
                 <div>
                     <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
                     <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
-                        <form class="uk-search uk-search-navbar uk-width-1-1" method="GET" action="/search">
+                        <form class="uk-search uk-search-navbar uk-width-1-1" id="search" method="GET" action="{{ url_for('blog.searching') }}">
                             <input class="uk-search-input" name="keyword" type="search" placeholder="Search..." autofocus>
                         </form>
                     </div>

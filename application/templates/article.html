@@ -12,7 +12,7 @@
         <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
             <div class="uk-width-auto uk-margin-top">
                 <a href="{{ url_for('blog.details', id=a.id) }}" class="">
-                    <img class="uk-comment-avatar" src="{{ a.thumbnail|default(url_for('static', filename='img/photo.jpg'), true) }}" width="80" height="80" alt="">
+                    <img class="uk-comment-avatar" src="{{ a.thumbnail|default(url_for('static', filename='img/thumbnail/default.jpg'), true) }}" width="80" height="80" alt="">
                 </a>
             </div>
             <div class="uk-width-expand uk-margin-top">

@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, request, session, flash, make_response
+from flask import Blueprint, render_template, redirect, url_for, request, session, flash, make_response, jsonify
 from flask_login import login_required, current_user, login_user, logout_user
 from ..forms import LoginForm, PublishForm
 from application.models import db, User, Article
 from sqlalchemy import desc
 import os
+import time
 import random
 import datetime
 
@@ -101,13 +102,21 @@ def publish():
         return render_template('publish.html', form=form)
 
 
+@bp.route('/searching')
+def searching():
+    keyword = request.args.get('keyword')
+    return render_template('search.html', keyword=keyword)
+
+
 @bp.route('/search')
 def search():
     keyword = request.args.get('keyword')
+    # simulate time taken job
+    time.sleep(3)
     result = Article.query.filter(Article.content.contains(keyword)).all()
     if len(result) == 0:
         result.extend(Article.query.filter(Article.title.contains(keyword)).all())
-    return render_template('result.html', result=result)
+    return render_template('result.html', result=result, keyword=keyword)
 
 
 def gen_rnd_filename():

@@ -1,57 +1,15 @@
-var bar = document.getElementById('js-progressbar');
-
-UIkit.upload('.js-upload', {
-
-    url: '',
-    multiple: true,
-
-    beforeSend: function () {
-        console.log('beforeSend', arguments);
-    },
-    beforeAll: function () {
-        console.log('beforeAll', arguments);
-    },
-    load: function () {
-        console.log('load', arguments);
-    },
-    error: function () {
-        console.log('error', arguments);
-    },
-    complete: function () {
-        console.log('complete', arguments);
-    },
-
-    loadStart: function (e) {
-        console.log('loadStart', arguments);
-
-        bar.removeAttribute('hidden');
-        bar.max = e.total;
-        bar.value = e.loaded;
-    },
-
-    progress: function (e) {
-        console.log('progress', arguments);
-
-        bar.max = e.total;
-        bar.value = e.loaded;
-    },
-
-    loadEnd: function (e) {
-        console.log('loadEnd', arguments);
-
-        bar.max = e.total;
-        bar.value = e.loaded;
-    },
-
-    completeAll: function () {
-        console.log('completeAll', arguments);
-
-        setTimeout(function () {
-            bar.setAttribute('hidden', 'hidden');
-        }, 1000);
-
-        alert('Upload Completed');
-    }
-
+$(document).ready(function(){
+    var keyword = $("#keyword").text();
+    var search_text = '<h3>搜索完成, 以下是所有包含 "<a id="keyword" class="uk-link-reset">' + keyword + '</a>" 的文章</h3>'
+    $.ajax({
+        type:'GET',
+        url:'/search',
+        data:{'keyword': keyword},
+        dataType:'html',
+        success:function(html){
+        var text = search_text
+            $("h3").html(text);
+            $("#container").html(html);
+        }
+    });
 });
-

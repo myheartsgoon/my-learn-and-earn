@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+{% endblock %}
+
+{% block title %}搜索{% endblock %}
+{% block content %}
+<div class="uk-container uk-container-small uk-margin-top">
+    <h3>正在搜索包含 "<a id="keyword" class="uk-link-reset">{{ keyword }}</a>" 的文章</h3>
+</div>
+<div id="container">
+    <div class="uk-container uk-container-small uk-margin-top uk-position-center">
+        <span class="uk-margin-small-right" uk-spinner="ratio: 3"></span>
+    </div>
+</div>
+
+{% endblock %}

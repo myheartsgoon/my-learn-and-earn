@@ -1,4 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block title %}搜索结果{% endblock %}
 {% block content %}
+<div class="uk-container uk-container-small uk-margin-top">
+    <p>"{{ keyword }}"的搜索结果:</p>
+</div>
 {% for r in result %}
 <div class="uk-container uk-container-small uk-margin-top article-background uk-box-shadow-medium uk-box-shadow-hover-xlarge">
     <article class="uk-comment">
