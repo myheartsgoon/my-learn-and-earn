@@ -55,13 +55,13 @@ def logout():
     return redirect(url_for('blog.home'))
 
 
-@bp.route('/articles/<int:page>')
+@bp.route('/articles/page/<int:page>')
 def articles(page=1):
     articles = Article.query.order_by(desc(Article.time)).paginate(page, current_app.config['PER_PAGE'], error_out=False)
     return render_template('article.html', articles=articles)
 
 
-@bp.route('/article/<id>')
+@bp.route('/article/<int:id>')
 def details(id):
     details = Article.query.filter_by(id=id).first()
     if details is not None:
