@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, session, flash, make_response, jsonify
+from flask import Blueprint, render_template, redirect, url_for, request, session, flash, make_response, current_app
 from flask_login import login_required, current_user, login_user, logout_user
 from ..forms import LoginForm, PublishForm
 from application.models import db, User, Article
@@ -9,7 +9,6 @@ import random
 import datetime
 
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 bp = Blueprint(
     'blog',
@@ -56,9 +55,9 @@ def logout():
     return redirect(url_for('blog.home'))
 
 
-@bp.route('/article')
-def article():
-    articles = Article.query.order_by(desc(Article.time)).all()
+@bp.route('/articles/<int:page>')
+def articles(page=1):
+    articles = Article.query.order_by(desc(Article.time)).paginate(page, current_app.config['PER_PAGE'], error_out=False)
     return render_template('article.html', articles=articles)
 
 
@@ -87,7 +86,7 @@ def publish():
             thumb_url = ''
         else:
             fname, fext = os.path.splitext(thumbnail.filename)
-            if fext.rsplit('.')[1] not in ALLOWED_EXTENSIONS:
+            if fext.rsplit('.')[1] not in current_app.config['ALLOWED_EXTENSIONS']:
                 flash('请上传png,jpg或者gif格式图片！')
                 return render_template('publish.html', form=form)
             rnd_name = '%s%s' % (gen_rnd_filename(), fext)
@@ -112,7 +111,7 @@ def searching():
 def search():
     keyword = request.args.get('keyword')
     # simulate time taken job
-    time.sleep(3)
+    time.sleep(1)
     result = Article.query.filter(Article.content.contains(keyword)).all()
     if len(result) == 0:
         result.extend(Article.query.filter(Article.title.contains(keyword)).all())

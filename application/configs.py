@@ -7,10 +7,12 @@ basedir = os.path.dirname(os.path.abspath(__file__))
 class Config(object):
     # Flask config
     SECRET_KEY = '^dhfU*W#Sds12:>C'
+    PER_PAGE = 10
     SQLALCHEMY_RECORD_QUERIES = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     USE_SESSION_FOR_NEXT = True
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=5)
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 class DevelopmentConfig(Config):

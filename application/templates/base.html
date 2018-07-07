@@ -55,7 +55,7 @@
                             <a href="{{ url_for('blog.home') }}"><span class="uk-margin-small-right" uk-icon="icon: home"></span> 首页</a>
                         </li>
                         <!-- <li class="uk-nav-header">Header</li> -->
-                        <li><a href="{{ url_for('blog.article') }}"><span class="uk-margin-small-right" uk-icon="icon: list"></span> 文章</a></li>
+                        <li><a href="{{ url_for('blog.articles', page=1) }}"><span class="uk-margin-small-right" uk-icon="icon: list"></span> 文章</a></li>
                         <li><a href="{{ url_for('blog.video') }}"><span class="uk-margin-small-right" uk-icon="icon: play-circle"></span> 视频 </a></li>
                         {% if not current_user.is_authenticated %}
                         <li class="uk-parent">
