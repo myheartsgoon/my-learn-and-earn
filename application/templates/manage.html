@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/delete.js') }}"></script>
+{% endblock %}
+
+{% block title %}管理{% endblock %}
+{% block content %}
+<div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom article-background">
+    <a id="new" class="uk-button uk-button-primary uk-button-small uk-margin-top" href="{{ url_for('blog.publish') }}" type="button">新增</a>
+    <button id="delete" class="uk-button uk-button-danger uk-button-small uk-margin-top" type="button">删除</button>
+    
+    {% if get_flashed_messages() %}
+    <div class="uk-alert-success" uk-alert>
+        {% for message in get_flashed_messages() %}
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <table class="uk-table uk-table-justify uk-table-divider">
+        <thead>
+            <tr>
+                <th><label><input class="uk-checkbox" type="checkbox" id="checkAll"></label></th>
+                <th class="uk-width-small">标题</th>
+                <th>描述</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a in articles %}
+            <tr>
+                <td><label><input class="uk-checkbox" type="checkbox" id="{{ a.id }}"></label></td>
+                <td>{{ a.title }}</td>
+                <td>{{ a.descp }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <form id="action_form" action="{{ url_for('blog.delete') }}" method="POST" style="display: none">
+        <input id="ids" name="ids" type="hidden">
+    </form>
+</div>
+{% endblock %}

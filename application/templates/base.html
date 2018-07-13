@@ -65,7 +65,8 @@
 
                         {% if current_user.is_authenticated %}
                         <li class="uk-nav-divider"></li>
-                        <li><a href="{{ url_for('blog.publish') }}"><span class="uk-margin-small-right" uk-icon="file-edit"></span> 发表</a></li>
+                        <li><a href="{{ url_for('blog.publish') }}"><span class="uk-margin-small-right" uk-icon="icon: file-edit"></span> 发表</a></li>
+                        <li><a href="{{ url_for('blog.manage') }}"><span class="uk-margin-small-right" uk-icon="icon: settings"></span> 管理</a></li>
                         <li><a href="{{ url_for('blog.logout') }}"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> 退出</a></li>
                         {% endif %}
                     </ul>

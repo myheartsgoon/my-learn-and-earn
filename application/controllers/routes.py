@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, sessio
 from flask_login import login_required, current_user, login_user, logout_user
 from ..forms import LoginForm, PublishForm
 from application.models import db, User, Article
-from sqlalchemy import desc
+from sqlalchemy import desc, or_
 import os
 import time
 import random
@@ -57,7 +57,8 @@ def logout():
 
 @bp.route('/articles/page/<int:page>')
 def articles(page=1):
-    articles = Article.query.order_by(desc(Article.time)).paginate(page, current_app.config['PER_PAGE'], error_out=False)
+    articles = Article.query.order_by(desc(Article.time)).paginate(
+                page, current_app.config['PER_PAGE'], error_out=False)
     return render_template('article.html', articles=articles)
 
 
@@ -68,6 +69,13 @@ def details(id):
         return render_template('details.html', details=details)
     else:
         return render_template('404.html')
+
+
+@bp.route('/category/<category>/page/<int:page>')
+def category(category, page=1):
+    result = Article.query.filter_by(category=category).order_by(desc(Article.time)).paginate(
+                page, current_app.config['PER_PAGE'], error_out=False)
+    return render_template('category.html', result=result, category=category)
 
 
 @bp.route('/publish', methods=['GET', 'POST'])
@@ -96,9 +104,29 @@ def publish():
         new_article = Article(title, descp, content, category, thumb_url)
         db.session.add(new_article)
         db.session.commit()
-        return redirect(url_for('blog.article'))
+        return redirect(url_for('blog.articles', page=1))
     elif request.method == 'GET':
         return render_template('publish.html', form=form)
+
+
+@bp.route('/manage')
+@login_required
+def manage():
+    articles = Article.query.order_by(desc(Article.time)).all()
+    return render_template('manage.html', articles=articles)
+
+
+@bp.route('/delete', methods=['POST'])
+@login_required
+def delete():
+    ids = request.form.get('ids')
+    filter_args = (Article.id == int(i) for i in ids.split(','))
+    result = Article.query.filter(or_(filter_args)).delete()
+    db.session.commit()
+    if result > 0:
+        flash('{0}篇文章已删除'.format(str(result)))
+        articles = Article.query.order_by(desc(Article.time)).all()
+        return redirect(url_for('blog.manage'))
 
 
 @bp.route('/searching')

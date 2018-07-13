@@ -15,7 +15,6 @@
 **To do:**
 - Admin to have a article manage system
 - Add article comment
-- Add category page
 - Featured article on home page can be changed
 
 **Demo:**

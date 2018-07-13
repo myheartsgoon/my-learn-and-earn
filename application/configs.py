@@ -11,7 +11,7 @@ class Config(object):
     SQLALCHEMY_RECORD_QUERIES = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     USE_SESSION_FOR_NEXT = True
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=5)
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=10)
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
