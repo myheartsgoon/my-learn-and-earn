@@ -34,6 +34,7 @@ class Article(db.Model):
     time = db.Column(db.DateTime, default=datetime.now)
     category = db.Column(db.String(10))
     thumbnail = db.Column(db.String(50))
+    likes = db.Column(db.Integer, default=0)
 
     def __init__(self, title, descp, content, category, thumbnail):
         self.title = title

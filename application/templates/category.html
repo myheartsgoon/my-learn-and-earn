@@ -39,7 +39,7 @@
 <div class="uk-container uk-container-small uk-margin-large-top uk-margin-xlarge-bottom">
     <ul class="uk-pagination uk-flex-center" uk-margin>
         {% if result.has_prev %}
-        <li><a href="{{ url_for('blog.articles', page=articles.prev_num) }}"><span uk-pagination-previous></span></a></li>
+        <li><a href="{{ url_for('blog.category', category=category, page=result.prev_num) }}"><span uk-pagination-previous></span></a></li>
         {% else %}
         <li class="uk-disabled"><a href="#"><span uk-pagination-previous></span></a></li>
         {% endif %}
@@ -48,12 +48,12 @@
             {% if result.page == i+1 %}
                 <li class="uk-active"><span>{{ i+1 }}</span></li>
             {% else %}
-                <li><a href="{{ url_for('blog.articles', page=i+1) }}">{{ i+1 }}</a></li>
+                <li><a href="{{ url_for('blog.category', category=category, page=i+1) }}">{{ i+1 }}</a></li>
             {% endif %}
         {% endfor %}
 
         {% if result.has_next %}
-        <li><a href="{{ url_for('blog.articles', page=articles.next_num) }}"><span uk-pagination-next></span></a></li>
+        <li><a href="{{ url_for('blog.category', category=category, page=result.next_num) }}"><span uk-pagination-next></span></a></li>
         {% else %}
         <li class="uk-disabled"><a href="#"><span uk-pagination-next></span></a></li>
         {% endif %}

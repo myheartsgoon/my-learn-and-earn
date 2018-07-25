@@ -2,13 +2,15 @@
 
 {% block head %}
 {{ super() }}
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/reload.js') }}"></script>
 {% endblock %}
 
 {% block title %}发表文章{% endblock %}
 {% block content %}
 <div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom">
-    <form method="POST" enctype=multipart/form-data action="/publish">
+    <form id="publish-form" method="POST" enctype=multipart/form-data action="/publish">
         {{ form.hidden_tag() }}
         <fieldset class="uk-fieldset">
 
@@ -74,7 +76,7 @@
                 <label><input class="uk-radio" type="radio" name="radio" value="生活"> 生活</label>
             </div>
 
-            <button class="uk-button uk-button-secondary">发表</button>
+            <button class="uk-button uk-button-primary">发表</button>
             <button class="uk-button uk-button-danger" uk-toggle="target: #modal-cancel">取消</button>
             <div id="modal-cancel" uk-modal>
                 <div class="uk-modal-dialog uk-modal-body">

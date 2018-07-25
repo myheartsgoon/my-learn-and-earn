@@ -4,6 +4,9 @@
 {{ super() }}
 <script src="{{ url_for('static', filename='js/highlight.min.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/monokai-sublime.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/like.css') }}" />
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/like.js') }}"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
 
@@ -12,8 +15,21 @@
 <div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom">
     <article class="uk-article">
         <h1 class="uk-article-title">{{ details.title }}</h1>
-        <p class="uk-comment-meta article-date">{{ details.time.strftime('%Y{y}%m{m}%d{d} %H:%M').format(y='年', m='月', d='日') }}</p>
+        <p class="uk-comment-meta article-date">
+            {{ details.time.strftime('%Y{y}%m{m}%d{d} %H:%M').format(y='年', m='月', d='日') }}
+            <a href="{{ url_for('blog.category', category=details.category, page=1) }}" class="uk-link-reset"><span uk-icon="icon: tag" class="uk-icon uk-margin-left"></span>
+                {{ details.category }}
+            </a>
+        </p>
         {{ details.content | safe }}
     </article>
+
+    <div id="{{ details.id }}" class="like-content">
+      <span>
+        喜欢这篇文章? 那就赞一下吧~
+      </span>
+
+      <button class="btn-secondary like-review">赞一下!</button>
+    </div>
 </div>
 {% endblock %}

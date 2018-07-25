@@ -6,6 +6,10 @@ from .configs import config
 
 
 def create_app(config_name=None):
+    """Create Flask app object based on environments.
+    :param config_name: string, allowed value: default/development/production.
+    :return: Flask app object.
+    """
     if config_name is None:
         config_name = 'default'
 

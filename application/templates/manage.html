@@ -3,45 +3,51 @@
 {% block head %}
 {{ super() }}
 <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/delete.js') }}"></script>
+<script src="{{ url_for('static', filename='js/manage.js') }}"></script>
 {% endblock %}
 
 {% block title %}管理{% endblock %}
 {% block content %}
 <div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom article-background">
-    <a id="new" class="uk-button uk-button-primary uk-button-small uk-margin-top" href="{{ url_for('blog.publish') }}" type="button">新增</a>
-    <button id="delete" class="uk-button uk-button-danger uk-button-small uk-margin-top" type="button">删除</button>
-    
-    {% if get_flashed_messages() %}
-    <div class="uk-alert-success" uk-alert>
-        {% for message in get_flashed_messages() %}
-            <a class="uk-alert-close" uk-close></a>
-            <p>{{ message }}</p>
-        {% endfor %}
-    </div>
-    {% endif %}
+    <ul class="uk-margin-top uk-text-bold" uk-tab>
+        <li><a class="tab-size" href="#">文章管理</a></li>
+        <li><a class="tab-size" href="#">首页展示</a></li>
+      </ul>
+    <ul class="uk-switcher uk-margin">
+        <li>
+            <a id="new" class="uk-button uk-button-primary uk-button-small uk-margin-top" href="{{ url_for('blog.publish') }}" type="button">新增</a>
+            <button id="delete" class="uk-button uk-button-danger uk-button-small uk-margin-top" type="button">删除</button>
+            <input class="uk-input uk-form-width-medium uk-form-small uk-margin-top searchFilter" type="text" placeholder="搜索..">
+            {% if get_flashed_messages() %}
+            <div class="uk-alert-success" uk-alert>
+                {% for message in get_flashed_messages() %}
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
 
-    <table class="uk-table uk-table-justify uk-table-divider">
-        <thead>
-            <tr>
-                <th><label><input class="uk-checkbox" type="checkbox" id="checkAll"></label></th>
-                <th class="uk-width-small">标题</th>
-                <th>描述</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for a in articles %}
-            <tr>
-                <td><label><input class="uk-checkbox" type="checkbox" id="{{ a.id }}"></label></td>
-                <td>{{ a.title }}</td>
-                <td>{{ a.descp }}</td>
-                <td></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <form id="action_form" action="{{ url_for('blog.delete') }}" method="POST" style="display: none">
-        <input id="ids" name="ids" type="hidden">
-    </form>
+            <table class="uk-table uk-table-hover uk-table-divider searchable">
+                <thead>
+                    <tr>
+                        <th><label><input class="uk-checkbox uk-margin-medium-right" type="checkbox" id="checkAll">  </label>  标题</th>
+                        <th>描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for a in articles %}
+                    <tr>
+                        <td><label><input class="uk-checkbox uk-margin-medium-right" type="checkbox" id="{{ a.id }}"></label><a href="{{ url_for('blog.details', id=a.id) }}" target="_blank" class="uk-link-heading">{{ a.title }}</a></td>
+                        <td class="comment more">{{ a.descp }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <form id="action_form" action="{{ url_for('blog.delete') }}" method="POST" style="display: none">
+                <input id="ids" name="ids" type="hidden">
+            </form>
+        </li>
+        <li>
+        </li>
 </div>
 {% endblock %}
