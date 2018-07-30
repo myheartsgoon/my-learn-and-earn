@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+{% endblock %}
+
+{% block title %}关于我{% endblock %}
+{% block content %}
+<div class="uk-container uk-container-small uk-margin-top uk-margin-xlarge-bottom">
+    <h2 class="">关于我</h2>
+    <article class="uk-margin-medium-top">
+        <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+            <div class="uk-width-auto">
+                <img class="uk-comment-avatar" src="{{ url_for('static', filename='img/about.jpg') }}" width="120" height="120" alt="">
+            </div>
+            <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove uk-text-large uk-text-bold">Wesley</h4>
+                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                    <li class="uk-margin-small-top"><span class="uk-margin-small-right" uk-icon="icon: location; ratio: 0.8"></span>Hangzhou</li>
+                    <li class="uk-margin-small-top"><span class="uk-margin-small-right" uk-icon="icon: users; ratio: 0.8"></span>Netease</li>
+                </ul>
+            </div>
+        </header>
+        <div class="uk-margin-medium-top uk-text-large">
+            <p>一枚运维+开发， Python热爱者。</p>
+        </div>
+    </article>
+    <div class="uk-margin-large-top">
+        <a class="uk-link-reset" href="https://github.com/myheartsgoon" uk-tooltip="GitHub主页"><span uk-icon="icon: github-alt; ratio: 1.5" class="uk-margin-small-right uk-icon"></span></a>
+        <a class="uk-link-reset" href="mailto:myheartsgoon@gmail.com" uk-tooltip="发送邮件"><span uk-icon="icon: mail; ratio: 1.5" class="uk-margin-small-right uk-icon"></span></a>
+    </div>
+</div>
+{% endblock %}

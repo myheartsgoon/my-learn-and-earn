@@ -1,3 +1,4 @@
+# coding: utf-8
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash, make_response, current_app, jsonify
 from flask_login import login_required, current_user, login_user, logout_user
 from ..forms import LoginForm, PublishForm
@@ -6,6 +7,11 @@ from sqlalchemy import desc, or_
 import os
 import random
 import datetime
+
+# if python 2, uncomment below three line to support Chinese.
+# import sys
+# reload(sys)
+# sys.setdefaultencoding('utf8')
 
 
 basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -122,8 +128,8 @@ def publish():
         descp = form.descp.data
         content = form.content.data
         category = request.form.get('radio')
-        thumbnail = request.files['thumbnail']
-        if thumbnail.filename == '':
+        thumbnail = request.files.get('thumbnail')
+        if thumbnail is None or thumbnail.filename == '':
             thumb_url = ''
         else:
             # upload thumbnail images
@@ -141,6 +147,15 @@ def publish():
         return redirect(url_for('blog.articles', page=1))
     elif request.method == 'GET':
         return render_template('publish.html', form=form)
+
+
+@bp.route('/error/413')
+def file_too_large():
+    """This is for nginx error code 413. If thumbnail image size is larger than
+    the limitation, nginx will redirect to this route.
+    :return: render 413.html.
+    """
+    return render_template('413.html')
 
 
 @bp.route('/manage')
@@ -262,6 +277,11 @@ def ckupload():
     response = make_response(res)
     response.headers["Content-Type"] = "text/html"
     return response
+
+
+@bp.route('/about')
+def about():
+    return render_template('about.html')
 
 
 @bp.route('/video')

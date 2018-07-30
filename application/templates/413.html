@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/goBack.js') }}"></script>
+{% endblock %}
+
+{% block title %}413 - 图片超出大小限制{% endblock %}
+{% block content %}
+<div class="uk-container uk-container-small uk-margin-top">
+    <p class="uk-text-lead">图片超出最大2M限制，请重新上传！</p>
+    <button id="go-back" class="uk-button uk-button-danger uk-button-small uk-margin-top" type="button">返回发布页面</button>
+</div>
+{% endblock %}

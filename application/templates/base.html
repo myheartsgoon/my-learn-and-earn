@@ -18,7 +18,12 @@
 
         <nav class="uk-navbar uk-navbar-container uk-margin">
             <div class="uk-navbar-left">
-                <a class="uk-navbar-item uk-logo" href="{{ url_for('blog.home') }}"><img width="50" src="{{ url_for('static', filename='img/logo.png') }}"></a>
+                <a class="uk-navbar-item uk-logo" href="{{ url_for('blog.home') }}" title="首页"><img width="50" src="{{ url_for('static', filename='img/logo.png') }}"></a>
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="{{ url_for('blog.home') }}" class="menu-text">首页</a></li>
+                    <li><a href="{{ url_for('blog.articles', page=1) }}">文章</a></li>
+                    <li><a href="{{ url_for('blog.about') }}">关于</a></li>
+                </ul>
             </div>
 
             <div class="uk-navbar-right">
@@ -56,7 +61,8 @@
                         </li>
                         <!-- <li class="uk-nav-header">Header</li> -->
                         <li><a href="{{ url_for('blog.articles', page=1) }}"><span class="uk-margin-small-right" uk-icon="icon: list"></span> 文章</a></li>
-                        <li><a href="{{ url_for('blog.video') }}"><span class="uk-margin-small-right" uk-icon="icon: play-circle"></span> 视频 </a></li>
+                        <li><a href="{{ url_for('blog.about') }}"><span class="uk-margin-small-right" uk-icon="icon: user"></span> 关于</a></li>
+                        <!--<li><a href="{{ url_for('blog.video') }}"><span class="uk-margin-small-right" uk-icon="icon: play-circle"></span> 视频 </a></li>-->
                         {% if not current_user.is_authenticated %}
                         <li class="uk-parent">
                             <a href="{{ url_for('blog.login') }}"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span> 登录</a>
@@ -80,14 +86,11 @@
                 <li><a href="mailto:myheartsgoon@gmail.com">
                     <span uk-icon="icon: mail" class="uk-margin-small-right uk-icon"></span>联系我</a>
                 </li>
-                <li><a href="https://github.com/uikit/uikit/stargazers">
-                    <span uk-icon="icon: commenting" class="uk-margin-small-right uk-icon"></span>获取帮助</a>
+                <li><a href="https://github.com/myheartsgoon/my-learn-and-earn">
+                    <span uk-icon="icon: github" class="uk-margin-small-right uk-icon"></span>GitHub</a>
                 </li>
-                <li><a href="https://github.com/myheartsgoon" class="uk-text-lowercase">
-                    <span uk-icon="icon: github" class="uk-margin-small-right uk-icon"></span>@myheartsgoon</a>
-                </li>
-                <li><a href="https://gitter.im/uikit/uikit">
-                    <span uk-icon="icon: gitter" class="uk-margin-small-right uk-icon"></span>更多</a>
+                <li><a href="{{ url_for('blog.about') }}">
+                    <span uk-icon="icon: user" class="uk-margin-small-right uk-icon"></span>关于</a>
                 </li>
             </ul>
         </div>
