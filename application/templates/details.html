@@ -20,6 +20,8 @@
             <a href="{{ url_for('blog.category', category=details.category, page=1) }}" class="uk-link-reset"><span uk-icon="icon: tag" class="uk-icon uk-margin-left"></span>
                 {{ details.category }}
             </a>
+            <span uk-icon="icon: heart" class="uk-icon uk-margin-left"></span>
+                {{ details.likes }}
         </p>
         {{ details.content | safe }}
     </article>

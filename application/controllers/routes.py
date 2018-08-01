@@ -8,10 +8,13 @@ import os
 import random
 import datetime
 
-# if python 2, uncomment below three line to support Chinese.
-# import sys
-# reload(sys)
-# sys.setdefaultencoding('utf8')
+# If Python2, import sys and set encoding utf-8, else ignore.
+try:
+    import sys
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+except NameError:
+    pass
 
 
 basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,7 +88,7 @@ def articles(page=1):
     """
     articles = Article.query.order_by(desc(Article.time)).paginate(
                 page, current_app.config['PER_PAGE'], error_out=False)
-    return render_template('article.html', articles=articles)
+    return render_template('article.html', articles=articles, count=articles.total)
 
 
 @bp.route('/article/<int:id>')

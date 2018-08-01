@@ -6,6 +6,13 @@
 
 {% block title %}文章{% endblock %}
 {% block content %}
+
+{% if articles.page == 1 %}
+<div class="uk-container uk-container-small uk-margin-top">
+    <p class="uk-text-lead uk-text-muted">共有{{ count }}篇文章。</p>
+</div>
+{% endif %}
+
 {% for a in articles.items %}
 <div class="uk-container uk-container-small uk-margin-top article-background uk-box-shadow-medium uk-box-shadow-hover-xlarge">
     <article class="uk-comment">
@@ -21,6 +28,9 @@
                     {{ a.time.strftime('%Y{y}%m{m}%d{d} %H:%M').format(y='年', m='月', d='日') }}
                     <a href="{{ url_for('blog.category', category=a.category, page=1) }}" class="uk-link-reset"><span uk-icon="icon: tag" class="uk-icon uk-margin-left"></span>
                     {{ a.category }}
+                    </a>
+                    <a href="{{ url_for('blog.details', id=a.id) }}" class="uk-link-reset"><span uk-icon="icon: heart" class="uk-icon uk-margin-left"></span>
+                    {{ a.likes }}
                     </a>
                 </p>
             </div>

@@ -18,5 +18,5 @@
 - Featured article on home page can be changed
 
 **Demo:**
-Click here: [Demo address](https://my-learn-and-earn-my-learn-and-earn.1d35.starter-us-east-1.openshiftapps.com/)
+Click here: [Demo address](http://18.182.54.53/)
 

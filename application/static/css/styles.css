@@ -60,3 +60,11 @@ a.morelink {
 .morecontent span {
 	display: none;
 }
+
+h1.text-center, a.text-center {
+    text-align: center;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: #f1f1f1;
+}

@@ -49,11 +49,11 @@
             {% endif %}
 
             <div class="uk-margin">
-                {{ form.title(class="uk-input") }}
+                {{ form.title(class="uk-input", required=True, oninvalid="this.setCustomValidity('请输入标题!')", onchange="this.setCustomValidity('')") }}
             </div>
 
             <div class="uk-margin">
-                {{ form.descp(class="uk-textarea", rows="3") }}
+                {{ form.descp(class="uk-textarea", rows="3", required=True, oninvalid="this.setCustomValidity('请输入简介!')", onchange="this.setCustomValidity('')") }}
             </div>
 
             <div class="uk-margin">
@@ -69,7 +69,7 @@
                         <input class="uk-input uk-form-small" type="text" placeholder="选择文件" disabled>
                     </div>
                 </div>
-                <span uk-icon="icon: info; ratio: 0.8" class="uk-margin-small-right uk-icon" uk-tooltip="title: 图片大小需小于2M; pos: right"></span>
+                <span uk-icon="icon: info; ratio: 0.8" class="uk-margin-small-right uk-icon" uk-tooltip="title: 建议400*300, 图片大小需小于2M; pos: right"></span>
             </div>
 
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">

@@ -40,14 +40,14 @@
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
-                    {{ form.username(class="uk-input") }}
+                    {{ form.username(class="uk-input", required=True, oninvalid="this.setCustomValidity('请输入用户名!')", onchange="this.setCustomValidity('')") }}
                 </div>
             </div>
 
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    {{ form.password(class="uk-input") }}
+                    {{ form.password(class="uk-input", required=True, oninvalid="this.setCustomValidity('请输入密码!')", onchange="this.setCustomValidity('')") }}
                 </div>
             </div>
             {{ form.login(class="uk-button uk-button-secondary uk-width-1-1") }}
