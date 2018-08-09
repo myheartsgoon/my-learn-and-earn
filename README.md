@@ -18,5 +18,5 @@
 - Add article comment
 
 **Demo:**
-Click here: [Demo address](http://18.182.54.53/)
+Click here: [Demo address](https://www.imwesley.xyz/)
 
