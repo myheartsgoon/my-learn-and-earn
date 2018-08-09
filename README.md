@@ -13,9 +13,9 @@
 - Article code highlights
 
 **To do:**
-- Admin to have a article manage system
+- Add archives by timeline
+- Add tags
 - Add article comment
-- Featured article on home page can be changed
 
 **Demo:**
 Click here: [Demo address](http://18.182.54.53/)

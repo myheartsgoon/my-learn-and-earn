@@ -26,7 +26,7 @@
                 <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-heading" href="{{ url_for('blog.details', id=a.id) }}">{{ a.title }}</a></h4>
                 <p class="uk-comment-meta article-date">
                     {{ a.time.strftime('%Y{y}%m{m}%d{d} %H:%M').format(y='年', m='月', d='日') }}
-                    <a href="{{ url_for('blog.category', category=a.category, page=1) }}" class="uk-link-reset"><span uk-icon="icon: tag" class="uk-icon uk-margin-left"></span>
+                    <a href="{{ url_for('blog.category', category=a.category, page=1) }}" class="uk-link-reset"><span uk-icon="icon: folder" class="uk-icon uk-margin-left"></span>
                     {{ a.category }}
                     </a>
                     <a href="{{ url_for('blog.details', id=a.id) }}" class="uk-link-reset"><span uk-icon="icon: heart" class="uk-icon uk-margin-left"></span>

@@ -68,3 +68,10 @@ h1.text-center, a.text-center {
 .uk-navbar-container:not(.uk-navbar-transparent) {
     background: #f1f1f1;
 }
+
+.side-tool {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1040;
+}

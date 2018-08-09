@@ -17,7 +17,7 @@
         <h1 class="uk-article-title">{{ details.title }}</h1>
         <p class="uk-comment-meta article-date">
             {{ details.time.strftime('%Y{y}%m{m}%d{d} %H:%M').format(y='年', m='月', d='日') }}
-            <a href="{{ url_for('blog.category', category=details.category, page=1) }}" class="uk-link-reset"><span uk-icon="icon: tag" class="uk-icon uk-margin-left"></span>
+            <a href="{{ url_for('blog.category', category=details.category, page=1) }}" class="uk-link-reset"><span uk-icon="icon: folder" class="uk-icon uk-margin-left"></span>
                 {{ details.category }}
             </a>
             <span uk-icon="icon: heart" class="uk-icon uk-margin-left"></span>
@@ -34,4 +34,5 @@
       <button class="btn-secondary like-review">赞一下!</button>
     </div>
 </div>
+<div class="side-tool"><a href="#" uk-scroll uk-icon="icon: chevron-up; ratio: 3"></a></div>
 {% endblock %}

@@ -1,4 +1,11 @@
 {% block content %}
+
+{% if result|length == 0 %}
+<div class="uk-container uk-container-small uk-margin-top">
+    <p class="uk-text-lead uk-text-muted">没有找到相关结果</p>
+</div>
+{% endif %}
+
 {% for r in result %}
 <div class="uk-container uk-container-small uk-margin-top article-background uk-box-shadow-medium uk-box-shadow-hover-xlarge">
     <article class="uk-comment">
